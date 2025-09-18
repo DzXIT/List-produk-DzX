@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Produk DzX - Solusi Gaming Terbaik</title>
+    <link rel="icon" href="https://files.catbox.moe/yij6c5.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 4, 40, 0.85), rgba(0, 78, 146, 0.85));
+        }
+        
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -2;
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 4, 40, 0.85), rgba(0, 78, 146, 0.85));
+            z-index: -1;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100vw);
+                opacity: 0;
+            }
+        }
+        
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 25px;
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(10, 15, 35, 0.8);
+            border-radius: 20px;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #ff8a00, #e52e71, #4f78ff) 1;
+            backdrop-filter: blur(12px);
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 138, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 138, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(229, 46, 113, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 138, 0, 0.5);
+            }
+        }
+        
+        .title {
+            text-align: center;
+            background: linear-gradient(45deg, #ff8a00, #e52e71, #4f78ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 2.8rem;
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle-container {
+            background: rgba(40, 40, 40, 0.6);
+            border-radius: 12px;
+            padding: 12px 25px;
+            border: 1px solid;
+            border-image: linear-gradient(45deg, #4f78ff, #4CAF50) 1;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #4f78ff, #4CAF50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 35px;
+            max-width: 1200px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background: rgba(10, 15, 35, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            width: 520px;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #ff8a00, #e52e71, #4f78ff) 1;
+            backdrop-filter: blur(12px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: fadeUp 1s ease-out;
+            animation-fill-mode: backwards;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .product-card:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+        
+        .product-card:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .product-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .product-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 18px;
+            margin-right: 25px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-icon:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(255, 138, 0, 0.7);
+        }
+        
+        .product-title {
+            font-size: 1.9rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        .product-percentage {
+            font-size: 1.3rem;
+            color: #4CAF50;
+            margin-top: 8px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+        
+        .product-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #ddd;
+            font-size: 1.05rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            display: flex;
+            align-items: center;
+        }
+        
+        .product-price::before {
+            content: "💰";
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .buy-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+        
+        .buy-button:hover {
+            background: linear-gradient(45deg, #e52e71, #ff8a00);
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .buy-button:active {
+            transform: scale(0.98);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: auto;
+            width: 100%;
+            background: rgba(10, 15, 35, 0.8);
+            border-radius: 15px;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #4f78ff, #4CAF50) 1;
+            backdrop-filter: blur(12px);
+            margin-bottom: 20px;
+            max-width: 1000px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .credits {
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #4f78ff, #4CAF50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        /* Modal untuk gambar yang diperbesar */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            overflow: auto;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            display: block;
+            margin: 0 auto;
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 30px rgba(255, 138, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #ff8a00;
+        }
+        
+        .sound-control {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(10, 15, 35, 0.8);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #ff8a00, #e52e71) 1;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .sound-control:hover {
+            transform: scale(1.1);
+        }
+        
+        .sound-control i {
+            font-size: 26px;
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            background: rgba(10, 15, 35, 0.9);
+            border-radius: 10px;
+            padding: 15px 20px;
+            border-left: 5px solid #4CAF50;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 100;
+            max-width: 300px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification p {
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+        
+        @media (max-width: 768px) {
+            .product-card {
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 2.2rem;
+            }
+            
+            .product-title {
+                font-size: 1.6rem;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .product-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .product-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video id="video-background" autoplay muted loop>
+        <source src="https://files.catbox.moe/w54vmn.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="particles" id="particles"></div>
+    
+    <header>
+        <div class="logo-container">
+            <img src="https://files.catbox.moe/yij6c5.png" alt="DzX Logo" class="logo">
+            <h1 class="title">All List Produk DzX</h1>
+        </div>
+        <div class="subtitle-container">
+            <p class="subtitle">DzX solusi gaming terbaik</p>
+        </div>
+    </header>
+    
+    <div class="products-container">
+        <div class="product-card">
+            <div class="product-header">
+                <img src="https://files.catbox.moe/bfawxn.jpg" alt="DragHeadshot Icon" class="product-icon" onclick="openModal(this)">
+                <div>
+                    <h2 class="product-title">DragHeadshot 97%</h2>
+                    <p class="product-percentage">Efektivitas: 97%</p>
+                </div>
+            </div>
+            <p class="product-description">
+                DragHeadshot berfungsi sebagai penyetabil aim dan meningkatkan lock ke target. Dengan teknologi terbaru, meningkatkan akurasi tembakan Anda secara signifikan.
+            </p>
+            <p class="product-price">Rp: 30.000</p>
+            <a href="https://wa.me/62882006164047" class="buy-button">Buy File</a>
+        </div>
+        
+        <div class="product-card">
+            <div class="product-header">
+                <img src="https://files.catbox.moe/123an8.jpg" alt="Cortexz V5 Icon" class="product-icon" onclick="openModal(this)">
+                <div>
+                    <h2 class="product-title">App Cortexz V5</h2>
+                    <p class="product-percentage">Versi: 5.0</p>
+                </div>
+            </div>
+            <p class="product-description">
+                App Berfungsi Untuk menyetabilkan fps saat bermain, melicinkan layar dan meningkatkan lock ke target. Dapat meningkatkan performa gaming hingga 40%.
+            </p>
+            <p class="product-price">Rp: 30.000</p>
+            <a href="https://wa.me/62882006164047" class="buy-button">Buy App</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p class="credits">Credits web by DzX - 2025</p>
+    </footer>
+    
+    <!-- Modal untuk gambar yang diperbesar -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    
+    <!-- Tombol kontrol suara -->
+    <div class="sound-control" onclick="toggleSound()">
+        <i class="fas fa-volume-up" id="soundIcon"></i>
+    </div>
+    
+    <!-- Notifikasi -->
+    <div class="notification" id="notification">
+        <p>Selamat datang di DzX Store! Sound telah diaktifkan.</p>
+    </div>
+    
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/0sgcdg.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        // Fungsi untuk membuat partikel
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Ukuran acak
+                const size = Math.random() * 5 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posisi acak
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                // Animasi delay acak
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Fungsi untuk memutar musik latar
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const audio = document.getElementById('bgMusic');
+            audio.volume = 0.3; // Set volume to 30%
+            
+            // Coba memutar musik secara otomatis
+            const playAudio = () => {
+                const playPromise = audio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log("Audio is playing automatically");
+                        document.getElementById('soundIcon').className = 'fas fa-volume-up';
+                        
+                        // Tampilkan notifikasi
+                        const notification = document.getElementById('notification');
+                        notification.classList.add('show');
+                        
+                        // Sembunyikan notifikasi setelah 5 detik
+                        setTimeout(() => {
+                            notification.classList.remove('show');
+                        }, 5000);
+                    }).catch(e => {
+                        console.log("Autoplay prevented: ", e);
+                        // Tampilkan indikator bahwa suara dimatikan
+                        document.getElementById('soundIcon').className = 'fas fa-volume-mute';
+                    });
+                }
+            };
+            
+            // Memutar musik ketika halaman dimuat
+            setTimeout(playAudio, 1000);
+            
+            // Juga coba memutar setelah interaksi pengguna
+            document.body.addEventListener('click', function() {
+                if (audio.paused) {
+                    playAudio();
+                }
+            });
+        });
+        
+        // Fungsi untuk toggle sound
+        function toggleSound() {
+            const audio = document.getElementById('bgMusic');
+            const soundIcon = document.getElementById('soundIcon');
+            
+            if (audio.paused) {
+                audio.play();
+                soundIcon.className = 'fas fa-volume-up';
+            } else {
+                audio.pause();
+                soundIcon.className = 'fas fa-volume-mute';
+            }
+        }
+        
+        // Fungsi untuk modal gambar
+        function openModal(img) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            modal.style.display = "block";
+            modalImg.src = img.src;
+        }
+        
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+        
+        // Tutup modal ketika mengklik di luar gambar
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
